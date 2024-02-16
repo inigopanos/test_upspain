@@ -1,5 +1,9 @@
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
+  HttpClientModule,
+  HttpClient,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -23,8 +27,14 @@ export class getCharactersService {
 
   // Gets characters from Api
   private getCharactersFromApi() {
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+    });
+
     this.http
-      .get<any[]>('https://rickandmortyapi.com/')
+      .get<any[]>('https://rickandmortyapi.com/api/character', {
+        headers: headers,
+      })
       .subscribe((data: Array<any>) => {
         this.setCharacters(data);
       });

@@ -22,13 +22,15 @@ export class CharacterListComponent implements OnInit {
   // Lifecycle hook executes on component initiation
   ngOnInit(): void {
     this.getAllCharacters();
+    console.log(this.characterList);
   }
 
   // Calls the service to get all characters
   private getAllCharacters() {
     this.getAllCharactersService.getCharacters().subscribe({
       next: (data) => {
-        this.characterList = data;
+        this.characterList = data.results;
+        console.log('Log de component:', this.characterList);
       },
     });
   }

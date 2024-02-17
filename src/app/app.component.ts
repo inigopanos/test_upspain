@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+
 import { CharacterListComponent } from './components/character-list/character-list.component';
 import { CharacterTableComponent } from './components/character-table/character-table.component';
 
@@ -12,6 +14,7 @@ import { CharacterTableComponent } from './components/character-table/character-
     RouterOutlet,
     CharacterListComponent,
     CharacterTableComponent,
+    MatButtonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

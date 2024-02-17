@@ -7,6 +7,7 @@ import { getCharactersService } from '../../../services/get-characters.service';
 import { getLocationService } from '../../../services/get-location.service';
 import { EditFormComponent } from '../edit-form/edit-form/edit-form.component';
 import { CharacterI } from '../../interface/character.interface';
+import { LocationI } from '../../interface/location.interface';
 
 @Component({
   selector: 'app-character-list',
@@ -17,8 +18,8 @@ import { CharacterI } from '../../interface/character.interface';
   providers: [getCharactersService, getLocationService],
 })
 export class CharacterListComponent implements OnInit {
-  characterList: Array<any> = [];
-  locationList: Array<any> = [];
+  characterList: Array<CharacterI> = [];
+  locationList: Array<LocationI> = [];
   locationUrls: Array<string> = [];
   editFormActive: boolean = false;
   status: string = 'Open';
@@ -39,8 +40,6 @@ export class CharacterListComponent implements OnInit {
     this.getAllCharactersService.getCharacters().subscribe({
       next: (data) => {
         this.characterList = data.results;
-        console.log(this.characterList);
-
         this.getUrls();
       },
     });
@@ -54,6 +53,7 @@ export class CharacterListComponent implements OnInit {
     });
   }
 
+  // Gets location id from url
   getUrls() {
     this.characterList.forEach((character) => {
       if (!character.location.url) return;
@@ -62,6 +62,7 @@ export class CharacterListComponent implements OnInit {
     });
   }
 
+  // Opens edit form
   openEditForm() {
     this.editFormActive = !this.editFormActive;
     if (this.editFormActive) {

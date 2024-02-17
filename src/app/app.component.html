@@ -1,8 +1,9 @@
-<div></div>
 <h1>Rick&Morty</h1>
-<button (click)="openList()">List</button>
-<p>{{ this.showList }}</p>
-<button (click)="openList()">Table</button>
+<div class="button-container">
+  <button mat-raised-button (click)="openList()">List</button>
+  <button mat-raised-button (click)="openList()">Table</button>
+</div>
+
 <app-character-list *ngIf="showList"></app-character-list>
 <app-character-table *ngIf="!showList"></app-character-table>
 <router-outlet></router-outlet>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 import { getCharactersService } from '../../../services/get-characters.service';
 import { getLocationService } from '../../../services/get-location.service';
@@ -8,7 +9,7 @@ import { getLocationService } from '../../../services/get-location.service';
 @Component({
   selector: 'app-character-list',
   standalone: true,
-  imports: [NgFor, NgIf, MatCardModule],
+  imports: [NgFor, NgIf, MatCardModule, MatButtonModule],
   templateUrl: './character-list.component.html',
   styleUrl: './character-list.component.scss',
   providers: [getCharactersService, getLocationService],

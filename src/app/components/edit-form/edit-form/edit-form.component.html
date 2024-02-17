@@ -1,0 +1,17 @@
+<form>
+  <label for="name">Name:</label>
+  <input type="text" id="name" [(ngModel)]="data.name" name="name" />
+
+  <label for="location">Location:</label>
+  <input
+    type="text"
+    id="location"
+    [(ngModel)]="data.location.name"
+    name="location"
+  />
+
+  <label for="status">Status:</label>
+  <input type="text" id="status" [(ngModel)]="data.status" name="status" />
+
+  <button type="submit">Close</button>
+</form>

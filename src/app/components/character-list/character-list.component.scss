@@ -10,17 +10,6 @@
     flex-direction: column-reverse;
     justify-content: space-around;
 
-    img {
-      width: 100%;
-      height: auto;
-      object-position: center center;
-      object-fit: cover;
-      margin: 0px;
-    }
-    img:hover {
-      transform: translateY(5px);
-    }
-
     mat-card-title {
       margin-top: 20px;
     }

@@ -2,7 +2,21 @@
 
 <p><em>Select a character from the list to see details.</em></p>
 <ul>
-  <li *ngFor="let character of characterList">
-    {{ character.name }}
-  </li>
+  <mat-card *ngFor="let character of characterList" class="character-card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{ character.name }}</mat-card-title>
+        <div>
+          <mat-card-subtitle>{{ character.location.name }}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{ locationUrls[character.id - 1] }}
+          </mat-card-subtitle>
+          <mat-card-subtitle></mat-card-subtitle>
+        </div>
+        <mat-card-subtitle>{{ character.status }}</mat-card-subtitle>
+        <img mat-card-sm-image src="{{ character.image }}" />
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content> </mat-card-content>
+  </mat-card>
 </ul>

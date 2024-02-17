@@ -1,28 +1,32 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { getCharactersService } from '../../../services/get-characters.service';
 import { NgIf, NgFor } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+
+import { getCharactersService } from '../../../services/get-characters.service';
+import { getLocationService } from '../../../services/get-location.service';
 
 @Component({
   selector: 'app-character-list',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, MatCardModule],
   templateUrl: './character-list.component.html',
   styleUrl: './character-list.component.scss',
-  providers: [getCharactersService],
+  providers: [getCharactersService, getLocationService],
 })
 export class CharacterListComponent implements OnInit {
   characterList: Array<any> = [];
+  locationList: Array<any> = [];
+  locationUrls: Array<string> = [];
 
   constructor(
-    private http: HttpClient,
-    private getAllCharactersService: getCharactersService
+    private getAllCharactersService: getCharactersService,
+    private getLocationService: getLocationService
   ) {}
 
   // Lifecycle hook executes on component initiation
   ngOnInit(): void {
     this.getAllCharacters();
-    console.log(this.characterList);
+    this.getLocation();
   }
 
   // Calls the service to get all characters
@@ -30,8 +34,24 @@ export class CharacterListComponent implements OnInit {
     this.getAllCharactersService.getCharacters().subscribe({
       next: (data) => {
         this.characterList = data.results;
-        console.log('Log de component:', this.characterList);
+        this.getUrls();
       },
+    });
+  }
+
+  private getLocation() {
+    this.getLocationService.getLocation().subscribe({
+      next: (data) => {
+        this.locationList = data.results;
+      },
+    });
+  }
+
+  getUrls() {
+    this.characterList.forEach((character) => {
+      if (!character.location.url) return;
+      const urlParts = character.location.url.split('/');
+      this.locationUrls.push(urlParts[5]);
     });
   }
 }
